@@ -15,23 +15,16 @@ import java.util.stream.Collectors;
 @Service
 public class BookService {
     private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
 
-    public BookService(BookRepository bookRepository, AuthorRepository authorRepository) {
+    public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.authorRepository = authorRepository;
     }
 
-    public List<BookResponse> findBooks(Pageable pageable){
+    public List<BookResponse> findBooks(Pageable pageable) {
         Page<Book> books = bookRepository.findAll(pageable);
         List<BookResponse> bookResponses = books.stream()
-                .map(book -> {
-                    Optional<Author> optionalAuthor = authorRepository.findById(book.getAuthorId());
-                    return BookResponse.of(book, optionalAuthor.get().getName());
-                }).collect(Collectors.toList());
+                .map(book -> BookResponse.of(book)).collect(Collectors.toList());
         return bookResponses;
     }
-
-
-
 }
+
