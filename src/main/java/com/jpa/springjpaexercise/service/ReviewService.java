@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -43,6 +44,15 @@ public class ReviewService {
         Review review = optionalReview.get();
         ReviewResponse reviewResponse = Review.of(review,id+"번 리뷰를 성공적으로 조회하였습니다.");
         return reviewResponse;
+    }
+
+    public List<ReviewResponse> getHospitalReviews(int id){
+        Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
+        Hospital hospital = optionalHospital.get();
+        List<ReviewResponse> reviewResponses = hospital.getReviews().stream()
+                .map(review -> ReviewResponse.of(review, id+"번 리뷰를 성공적으로 조회하였습니다."))
+                .collect(Collectors.toList());
+        return reviewResponses;
     }
 
 
