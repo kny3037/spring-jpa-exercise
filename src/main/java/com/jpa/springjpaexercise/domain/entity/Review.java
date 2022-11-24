@@ -1,6 +1,7 @@
 package com.jpa.springjpaexercise.domain.entity;
 
 import com.jpa.springjpaexercise.domain.dto.ReviewRequest;
+import com.jpa.springjpaexercise.domain.dto.ReviewResponse;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,13 +25,14 @@ public class Review {
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
-    /*public static ReviewRequest of(Review review) {
-        return ReviewRequest.builder()
-                .id(review.getId())
-                .hospitalId(review.getHospital().getId())
-                .content(review.getContent())
-                .patientName(review.getPatientName())
-                .build();
-    }*/
+    public static ReviewResponse of(Review review, String message) {
+        return new ReviewResponse(
+                review.getId(),
+                review.getTitle(),
+                review.getContent(),
+                review.getPatientName(),
+                message
+                );
+    }
 
 }

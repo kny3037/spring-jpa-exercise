@@ -38,20 +38,13 @@ public class ReviewService {
                 "리뷰 등록이 성공 했습니다.");
     }
 
-    /*public ReviewRequest get(int id){
+    public ReviewResponse getOneReview(int id) {
         Optional<Review> optionalReview = reviewRepository.findById(id);
-        ReviewRequest reviewRequest = Review.of(optionalReview.get());
-        return reviewRequest;
+        Review review = optionalReview.get();
+        ReviewResponse reviewResponse = Review.of(review,id+"번 리뷰를 성공적으로 조회하였습니다.");
+        return reviewResponse;
     }
 
-    public ReviewRequest getReview(int id){
-        Optional<Review> optionalReview = reviewRepository.findById(id);
-        Review review;
-        if (optionalReview.isPresent()){
-            return ReviewRequest.of(optionalReview.get());
-        }else {
-            return ReviewRequest.builder().message("불러올 수 없는 id입니다.").build();
-        }
-    }*/
+
 }
 
