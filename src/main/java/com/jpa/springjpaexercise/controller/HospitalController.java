@@ -28,9 +28,19 @@ public class HospitalController {
         return ResponseEntity.ok().body(hospitalService.getHospitalList(pageable));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ReviewResponse> getOneReview(@PathVariable int id){
+        return ResponseEntity.ok().body(reviewService.getOneReview(id));
+    }
+
     @PostMapping("/{id}/reviews")
-    public ResponseEntity<ReviewResponse> getReviewById(@PathVariable int id, @RequestBody ReviewRequest reviewRequest) {
+    public ResponseEntity<ReviewResponse> addReview(@PathVariable int id, @RequestBody ReviewRequest reviewRequest) {
         return ResponseEntity.ok().body(reviewService.addReview(id,reviewRequest));
+    }
+
+    @GetMapping("/{id}/reviews")
+    public ResponseEntity<List<ReviewResponse>> getHospitalReviews(@PathVariable int id){
+        return ResponseEntity.ok().body(reviewService.getHospitalReviews(id));
     }
 
 
