@@ -1,9 +1,6 @@
 package com.jpa.springjpaexercise.controller;
 
-import com.jpa.springjpaexercise.domain.dto.ReviewReadResponse;
 import com.jpa.springjpaexercise.domain.dto.ReviewResponse;
-import com.jpa.springjpaexercise.domain.entity.Review;
-import com.jpa.springjpaexercise.service.HospitalService;
 import com.jpa.springjpaexercise.service.ReviewService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
