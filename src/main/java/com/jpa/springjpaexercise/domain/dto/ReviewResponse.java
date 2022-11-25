@@ -14,15 +14,7 @@ public class ReviewResponse {
     private String title;
     private String content;
     private String patientName;
+    private String hospitalName;
     private String message;
 
-    public static ReviewResponse of(Review review, String message) {
-        return ReviewResponse.builder()
-                .id(review.getId())
-                .patientName(review.getPatientName())
-                .title(review.getTitle())
-                .content(review.getContent())
-                .message(message)
-                .build();
-    }
 }

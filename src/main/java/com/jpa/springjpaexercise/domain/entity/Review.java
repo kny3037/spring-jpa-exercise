@@ -25,14 +25,13 @@ public class Review {
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
-    public static ReviewResponse of(Review review, String message) {
-        return new ReviewResponse(
-                review.getId(),
-                review.getTitle(),
-                review.getContent(),
-                review.getPatientName(),
-                message
-                );
+    public ReviewResponse of() {
+        return ReviewResponse.builder()
+                .id(this.id)
+                .hospitalName(this.hospital.getHospitalName())
+                .patientName(this.patientName)
+                .title(this.title)
+                .content(this.content)
+                .build();
     }
-
 }

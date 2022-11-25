@@ -32,17 +32,15 @@ public class ReviewService {
                 .hospital(hospital.get())
                 .build();
         Review savedReview = reviewRepository.save(review);
-        return new ReviewResponse(savedReview.getId(),
-                savedReview.getTitle(),
-                savedReview.getContent(),
-                savedReview.getContent(),
-                "리뷰 등록이 성공 했습니다.");
+        ReviewResponse reviewResponse = savedReview.of();
+        reviewResponse.setMessage("리뷰가 잘 등록 되었습니다.");
+        return reviewResponse;
     }
 
     public ReviewResponse getOneReview(int id) {
         Optional<Review> optionalReview = reviewRepository.findById(id);
-        Review review = optionalReview.get();
-        ReviewResponse reviewResponse = Review.of(review,id+"번 리뷰를 성공적으로 조회하였습니다.");
+        //Review review = optionalReview.get();
+        ReviewResponse reviewResponse = optionalReview.get().of();
         return reviewResponse;
     }
 
@@ -50,7 +48,7 @@ public class ReviewService {
         Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
         Hospital hospital = optionalHospital.get();
         List<ReviewResponse> reviewResponses = hospital.getReviews().stream()
-                .map(review -> ReviewResponse.of(review, id+"번 리뷰를 성공적으로 조회하였습니다."))
+                .map(review -> review.of())
                 .collect(Collectors.toList());
         return reviewResponses;
     }
